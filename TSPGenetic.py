@@ -149,10 +149,6 @@ class TSP_BF:
             self.fitness[i] = 1/self.fitness[i]
             total_fitness += self.fitness[i]
 
-        # Normalise fitness values
-        for i in range(len(self.fitness)):
-            self.fitness[i] /= total_fitness
-
 
     def calculate_distance(self, p):
         total = 0
