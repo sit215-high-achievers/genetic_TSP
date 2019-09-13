@@ -8,20 +8,21 @@ import time
 
 class TSP_BF:
     def __init__(self):
-        self.visuals = False
-        self.mutation_rate = 0.01 
-        pop_size = 100
+        self.visuals = True
+        self.mutation_rate = 0.01
+        pop_size = 1000
 
         #Test data
-        self.cities = [(323, 90), (28, 123), (226, 390), (119, 37), (316, 282), (104, 1), (103, 181), (14, 88), (198, 368), (179, 122)]
+        #self.cities = [(269, 44), (235, 366), (323, 382), (252, 234), (162, 367), (149, 129), (99, 260), (25, 27), (311, 255), (12, 21), (112, 379), (238, 292), (359, 283), (367, 96), (76, 76), (200, 44), (174, 101), (75, 373), (130, 312), (279, 147)]
         #Uncomment the following line and comment out the above line to generate a random list of cities
-        #self.cities = []
+        self.cities = []
         if not self.cities:
-            cities_count = 20
+            cities_count = 10
             for i in range(cities_count):
                 x = random.randint(0, 399)
                 y = random.randint(0, 399)
                 self.cities.append((x ,y))
+        print(self.cities)
 
         # Fill population with random permutations
         self.population = [None] * pop_size
@@ -98,7 +99,7 @@ class TSP_BF:
                 if iter_limit > 5000:
                     break
             new_pop[i] = self.crossover(parentA, parentB)
-        new_pop = self.mutate(new_pop)
+            new_pop[i] = self.mutate(new_pop[i])
 
         self.population = new_pop
 
@@ -131,7 +132,7 @@ class TSP_BF:
         # the current element with a random element from the population
         for i in range(len(p)):
             if random.random() < self.mutation_rate:
-                idx = random.randint(0, len(self.population)-1)
+                idx = random.randint(0, len(self.cities)-1)
                 p[i], p[idx] = p[idx], p[i]
         return p
         
